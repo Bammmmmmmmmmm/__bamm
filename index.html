@@ -1,0 +1,313 @@
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+<!-- Link library leaflet -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+    integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+    crossorigin="" />
+
+<!-- W3 CSS template -->
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+    integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+    crossorigin="">
+  </script>
+
+  <style>
+    #mapid {
+  height: 550px;
+    }
+  </style>
+ <title>Northern Tourist map</title>
+</head>
+<body bgcolor= '#F5E3CB'>
+  <center>
+  <br>
+  <FONT FACE="DB Manit X" size = "10">
+  <strong><font color="#44140c">🛵 Enjoy various places in Northern <b>Thailand</b></a></FONT></strong>
+  </FONT><br>
+  </center>
+  <!-- แบ่งหน้าจอ -->
+      <div class="w3-row">
+              <div id="mapid" class="w3-half"></div>
+              <div id="content" class="w3-half">
+                  <table class="w3-table w3-striped">
+                      <tr>
+                          <th>ชื่อแหล่งท่องเที่ยว</th>
+                          <th>ประเภท</th>
+                          <th>ระดับ</th>
+                      </tr>
+                      <tr>
+                          <td>น้ำตก A</td>
+                          <td>ธรรมชาติ</td>
+                          <td>A</td>
+                      </tr>
+                  </table>
+              </div>
+          </div>
+  <!-- เรียกแผนที่ขึ้นมาแสดง -->
+    <script>
+  // เรียกแผนที่
+    var map = L.map("mapid").setView([18.343594866272994,98.95948834819647 ],6.5);
+  //based map1
+    var gsat = L.tileLayer("https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}")
+                .addTo(map);
+  //based map2
+    var osm = L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}")
+               .addTo(map);
+  //group layers (1+2)
+    var baseMaps ={
+  //ชื่อชั้นข้อมูล:ตัวแปร
+        OSM:osm,
+        GoogleSat:gsat
+    };
+  //add data
+  var tourpoint = {
+      type: "FeatureCollection",
+      name: "tour_plk",
+      crs: {
+        type: "name",
+          properties: { name: "urn:ogc:def:crs:OGC:1.3:CRS84" },
+      },
+    features: [
+    {
+      type: "Feature",
+      properties: {
+        Name: "กองแลน",
+        Type: "ธรรมชาติ",
+        FID_1: 1358.0,
+        CHANGWAT: "แม่ฮ่องสอน",
+        PROVINCE_1: "Maehongson ",
+        REGION: "ภาคเหนือ",
+        level: "💛💛💛💛💛",
+    },
+      geometry: {type: "MultiPoint", coordinates: [[ 98.45250579970642,19.306120748526357]],},
+    },
+    {
+      type: "Feature",
+      properties: {
+        Name: "ดอยผาฮี้",
+        Type: "ธรรมชาติ",
+        FID_1: 1357.0,
+        CHANGWAT: "เชียงราย",
+        PROVINCE_1: "Chiang Rai",
+        REGION: "ภาคเหนือ",
+        level: "💛💛💛💛",
+      },
+      geometry: {type: "MultiPoint", coordinates: [[99.83211868239583,20.361740883548933 ]],},
+    },
+    {
+      type: "Feature",
+      properties: {
+        Name: "น้ำพุร้อนไทรงาม",
+        Type: "ธรรมชาติ",
+        FID_1: 1362.0,
+        CHANGWAT: "แม่ฮ่องสอนี",
+        PROVINCE_1: "Maehongson",
+        REGION: "ภาคเหนือ",
+        level: "💛💛💛💛💛",
+      },
+      geometry: {type: "MultiPoint", coordinates: [[98.37994521280305,19.459368229155782,]],},
+    },
+    {
+      type: "Feature",
+      properties: {
+        Name: "น้ำตกธารสวรรค์",
+        Type: "อุทยาน",
+        FID_1: 1364.0,
+        CHANGWAT: "พะเยา",
+        PROVINCE_1: "Phayao",
+        REGION: "ภาคเหนือ",
+        level: "💛💛💛💛",
+      },
+      geometry: {type: "MultiPoint", coordinates: [[100.18185673941436,18.85941158616785]],},
+    },
+    {
+      type: "Feature",
+      properties: {
+        Name: "ต้นสมพงยักษ์",
+        Type: "อุทยาน",
+        FID_1: 1355.0,
+        CHANGWAT: "พะเยา",
+        PROVINCE_1: "Phayao",
+        REGION: "ภาคเหนือ",
+        level: "💛💛💛",
+      },
+      geometry: {type: "MultiPoint", coordinates: [[99.71837838782193,19.94754430274677]],},
+    },
+    {
+      type: "Feature",
+      properties: {
+        Name: "กว๊านพะเยา",
+        Type: "ธรรมชาติ",
+        FID_1: 1365.0,
+        CHANGWAT: "พะเยา",
+        PROVINCE_1: "Phayao",
+        REGION: "ภาคเหนือ",
+        level: "💛💛💛💛💛",
+      },
+      geometry: {type: "MultiPoint", coordinates: [[99.86666713212287,19.167470756520174]],},
+    },
+    {
+      type: "Feature",
+      properties: {
+        Name: "วังศิลาแลง",
+        Type: "ธรรมชาติ",
+        FID_1: 733.0,
+        CHANGWAT: "น่าน",
+        PROVINCE_1: "Nan",
+        REGION: "ภาคเหนือ",
+        level: "💛💛💛",
+      },
+      geometry: {type: "MultiPoint", coordinates: [[100.95773612123887,19.137321169216364]],},
+    },
+    {
+      type: "Feature",
+      properties: {
+        Name: "น้ำตกก้อหลวง",
+        Type: "อุทยาน",
+        FID_1: 1359.0,
+        CHANGWAT: "ลำพูน",
+        PROVINCE_1: "Lamphun",
+        REGION: "ภาคเหนือ",
+        level: "💛💛💛💛",
+      },
+      geometry: {type: "MultiPoint", coordinates: [[98.81737726524354,17.583733004027465]],},
+    },
+    {
+      type: "Feature",
+      properties: {
+        Name: "สวนสนบ่อแก้ว",
+        Type: "อุทยาน",
+        FID_1: 603.0,
+        CHANGWAT: "เชียงใหม่",
+        PROVINCE_1: "Chiangmai",
+        REGION: "ภาคเหนือ",
+        level: "💛💛💛💛",
+      },
+      geometry: {type: "MultiPoint", coordinates: [[98.38852021385814,18.156948633566614]],},
+    },
+    {
+        type: "Feature",
+        properties: {
+          Name: "น้ำตกปิตุ๊โกร",
+          Type: "ธรรมชาติ",
+          FID_1: 611.0,
+          CHANGWAT: "ตาก",
+          PROVINCE_1: "Tak",
+          REGION: "ภาคเหนือ",
+          level: "💛💛💛💛💛",
+      },
+      geometry: {type: "MultiPoint", coordinates: [[98.61309232582498,15.866916951700718]],},
+    },
+    ],
+    };
+  // add marker and popup
+    var tourLayer = L.geoJSON(tourpoint, {
+        pointToLayer: function (feature, latlng) {
+          return L.marker(latlng).bindPopup(feature.properties.Name);
+        },
+        onEachFeature: function (feature, layer) {
+          layer.on("mouseover", function () {
+            document
+              .getElementById(feature.properties.FID_1)
+              .classList.add("w3-red");
+          });
+
+           layer.on("mouseout", function () {
+              document
+                .getElementById(feature.properties.FID_1)
+                .classList.remove("w3-red");
+          });
+          },
+          }).addTo(map);
+  // Link Table Popup and marker
+  var cont = "";
+  cont += "<table class='w3-table w3-striped'>";
+  cont += "<tr>";
+  cont += "<th>ชื่อแหล่งท่องเที่ยว</th>";
+  cont += "<th>ประเภท</th>";
+  cont += "<th>ระดับ</th>";
+  cont += "</tr>";
+  for (let i in tourpoint.features) {
+    cont += "<tr id=" + tourpoint.features[i].properties.FID_1 + ">";
+    cont += "<td>" + tourpoint.features[i].properties.Name + "</td>";
+    cont += "<td>" + tourpoint.features[i].properties.Type + "</td>";
+    cont += "<td>" + tourpoint.features[i].properties.level + "</td>";
+    cont += "</tr>";
+  }
+  cont += "</table>";
+  console.log(cont);
+  document.getElementById("content").innerHTML = cont;
+
+//create polygon
+  var polygonGeoJson = {
+       "type": "FeatureCollection",
+       "features": [
+         {
+           "type": "Feature",
+           "properties": {},
+           "geometry": {
+             "type": "LineString",
+             "coordinates": [
+               [
+                 98.44848632812499,
+                 16.825574258731486
+               ],
+               [
+                 100.99731445312499,
+                 16.762467717941604
+               ],
+               [
+                 101.195068359375,
+                 20.262197124246534
+               ],
+               [
+                 97.899169921875,
+                 20.210656234489853
+               ],
+               [
+                 97.833251953125,
+                 16.836089974560213
+               ],
+               [
+                 98.558349609375,
+                 16.836089974560213
+               ]
+             ]
+           }
+         }
+       ]
+     }
+
+     var polygonLayer = L.geoJSON(polygonGeoJson, {
+          style: function (feature) {
+                 return { color: feature.properties.color };
+          },
+          onEachFeature: function (feature, layer) {
+              layer.bindPopup(feature.properties.name);
+
+              layer.on("mouseover", function () {
+                  layer.openPopup();
+              });
+
+              layer.on("mouseout", function () {
+                  layer.closePopup();
+              });
+           },
+      });
+
+    // group point + polygon layer
+      var overlays = {
+          สถานที่ท่องเที่ยว: tourLayer,
+          ขอบเขต: polygonLayer
+      };
+
+    //Create layer control
+       L.control.layers(baseMaps, overlays).addTo(map);
+</script>
+</body>
+</html>
